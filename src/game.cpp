@@ -46,14 +46,24 @@ void Game::initSystems(){
     if (err != GLEW_OK)
         error("Could not initialize GLEW");
 
+    SDL_GL_SetAttribute(SDL_GL_DOUBLEBUFFER, 1);
+
+
+    // set bg color
+    glClearColor(0.0f, 0.0f, 1.0f, 1.0f);
 }
 void Game::endrun(){
     SDL_Quit();
 }
 
 void Game::drawGame(){
-    
+    glClearDepth(1.0);
+    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
+
+
+
+    SDL_GL_SwapWindow(window);
 }
 
 
