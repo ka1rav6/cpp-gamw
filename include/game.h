@@ -12,20 +12,28 @@
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_opengl.h>
 
+enum class State{
+    PLAY, //0
+    EXIT, //1
+};
+
 class Game{
 public:
     Game();
     ~Game();
     
     void run();
-    void initSystems();
-
-
+    
+    
 private:
+    void initSystems();
+    void gameLoop();
+    void processInput();
     SDL_Window *window;
+    State state;
+    void endrun();
     const int screenWidth = 1024;
     const int screenHeight = 768;
-    
 };
 
 
