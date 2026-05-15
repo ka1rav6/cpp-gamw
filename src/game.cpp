@@ -5,7 +5,6 @@
 
 
 void error(std::string msg){
-
     std::cout << msg <<std::endl;
     SDL_Quit();
 
@@ -19,26 +18,49 @@ Game::Game(){
 Game::~Game(){}
 
 void Game::run(){
-    std::cout << "Game has started running" <<std::endl;
+
     this->initSystems();
     std::cout << "Systems Initialized" <<std::endl;
     
-    SDL_CreateWindow("Game Engine", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, screenWidth, screenHeight, SDL_WINDOW_OPENGL);
-    std::cout << "Window Created" <<std::endl;
+    // game starts
 
     gameLoop();
 }
 
 void Game::initSystems(){
     SDL_Init(SDL_INIT_EVERYTHING);
+
+
+    //window initialization
+    window = SDL_CreateWindow("Game Engine", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, screenWidth, screenHeight, SDL_WINDOW_OPENGL);
+    if (window == nullptr) 
+        error("Window could not be created!");
+
+    //context initialization
+    SDL_GLContext glContext = SDL_GL_CreateContext(window);
+    if (glContext == nullptr)
+        error("GL Context could not be created");
+
+    //glew initialization
+    GLenum err = glewInit();
+    if (err != GLEW_OK)
+        error("Could not initialize GLEW");
+
 }
 void Game::endrun(){
     SDL_Quit();
 }
 
+void Game::drawGame(){
+    
+
+}
+
+
 void Game::gameLoop(){
     while (this->state != State::EXIT){
         processInput();
+        drawGame();
     }
     endrun();
 }

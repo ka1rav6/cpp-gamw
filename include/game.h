@@ -32,6 +32,7 @@ private:
     SDL_Window *window;
     State state;
     void endrun();
+    void drawGame();
     const int screenWidth = 1024;
     const int screenHeight = 768;
 };
