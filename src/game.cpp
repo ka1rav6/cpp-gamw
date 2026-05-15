@@ -8,7 +8,7 @@ Game::Game(){
 
 
 }
-
+Game::~Game(){}
 void Game::run(){
     this->initSystems();
 
